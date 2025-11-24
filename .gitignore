@@ -1,0 +1,47 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build files (if any)
+dist/
+build/
+
+# Test files (if any)
+test/
+tests/
+
+# Documentation that shouldn't be in repo
+# (keep README.md, LICENSE, etc.)
+
+# ZIP files (keep the main release one, but ignore others)
+*.zip
+!Moodle_Downloader_Extension_v1.3.1.zip
+
+# Python cache (if using create_icons.py)
+__pycache__/
+*.pyc
+
+# Node modules (if any)
+node_modules/
+
+# Environment files
+.env
+.env.local
+
+

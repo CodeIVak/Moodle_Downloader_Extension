@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moodle PDF Downloader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="biu-logo">🏛️</div>
+            <h2>Moodle Downloader</h2>
+            <p class="subtitle">לסטודנטים באוניברסיטת בר אילן</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" data-tab="pdfs">📄 קבצי PDF</button>
+            <button class="tab-button" data-tab="recordings">🎥 הקלטות</button>
+        </div>
+        
+        <!-- PDF Tab Content -->
+        <div class="tab-content active" id="pdfs-tab">
+            <p class="description">לחץ כדי למצוא קישורי PDF בדף הקורס הנוכחי. תוכל להוריד קבצים בודדים או את כל הקבצים בבת אחת.</p>
+            
+            <div class="folder-selection">
+                <label for="folderNameInput">📁 שם תיקייה להורדה (אופציונלי):</label>
+                <div class="folder-input-group">
+                    <input type="text" id="folderNameInput" placeholder="שם הקורס יותאם אוטומטית" />
+                    <button id="useCourseNameButton" title="השתמש בשם הקורס">📚</button>
+                </div>
+                <small class="folder-hint">הקבצים יורדו לתיקייה בשם זה בתוך תיקיית ההורדות</small>
+            </div>
+            
+            <button id="scanButton">🔍 מצא קבצי PDF</button>
+            
+            <div id="status"></div>
+            
+            <div class="stats" id="stats" style="display: none;">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">סה"כ קבצים</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="downloadedCount">0</div>
+                    <div class="stat-label">הורדו</div>
+                </div>
+            </div>
+            
+            <div class="link-list" id="linkList"></div>
+        </div>
+        
+        <!-- Recordings Tab Content -->
+        <div class="tab-content" id="recordings-tab">
+            <p class="description">לחץ כדי למצוא הקלטות (וידאו/אודיו) בדף הקורס הנוכחי. תוכל להוריד הקלטות בודדות או את כל ההקלטות בבת אחת.</p>
+            
+            <div class="folder-selection">
+                <label for="recordingsFolderNameInput">📁 שם תיקייה להורדה (אופציונלי):</label>
+                <div class="folder-input-group">
+                    <input type="text" id="recordingsFolderNameInput" placeholder="שם הקורס יותאם אוטומטית" />
+                    <button id="useCourseNameRecordingsButton" title="השתמש בשם הקורס">📚</button>
+                </div>
+                <small class="folder-hint">ההקלטות יורדו לתיקייה בשם זה בתוך תיקיית ההורדות</small>
+            </div>
+            
+            <button id="scanRecordingsButton">🔍 מצא הקלטות</button>
+            
+            <div id="recordingsStatus"></div>
+            
+            <div class="stats" id="recordingsStats" style="display: none;">
+                <div class="stat-item">
+                    <div class="stat-value" id="recordingsTotalCount">0</div>
+                    <div class="stat-label">סה"כ הקלטות</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="recordingsDownloadedCount">0</div>
+                    <div class="stat-label">הורדו</div>
+                </div>
+            </div>
+            
+            <div class="link-list" id="recordingsList"></div>
+        </div>
+        
+        <a href="guide.html" target="_blank" class="guide-link">📖 פתח מדריך שימוש מפורט</a>
+        
+        <div class="disclaimer">
+            <p class="disclaimer-text">
+                <strong>⚠️ הצהרת אחריות:</strong> התוסף מסופק "כפי שהוא" ללא כל אחריות. השימוש בתוסף הוא על אחריות המשתמש בלבד. 
+                התוסף אינו קשור לאוניברסיטת בר אילן או למערכת למדא ואינו נתמך על ידם רשמית.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <div class="credits">
+                <p class="author">פותח על ידי: <strong>Idan Vaknin</strong></p>
+                <button id="supportButton" class="support-button">💬 תמיכה</button>
+                <div id="supportInfo" class="support-info" style="display: none;">
+                    <div class="support-content">
+                        <p class="support-label">לפניות תמיכה:</p>
+                        <p class="support-email">
+                            <a href="mailto:idan.vaknin1@live.biu.ac.il" class="support-link">idan.vaknin1@live.biu.ac.il</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="utils.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

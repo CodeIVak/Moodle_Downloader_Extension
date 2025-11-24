@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדריך שימוש - Moodle PDF Downloader</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 50%, #3da66b 100%);
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2d8659;
+        }
+        
+        .header h1 {
+            color: #1a5f3f;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #2d8659;
+            font-size: 18px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-right: 4px solid #2d8659;
+        }
+        
+        .section h2 {
+            color: #1a5f3f;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h3 {
+            color: #2d8659;
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 18px;
+        }
+        
+        .step h4 {
+            color: #1a5f3f;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .illustration {
+            background: #f8f9fa;
+            border: 2px dashed #2d8659;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            direction: ltr;
+            text-align: left;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #856404;
+        }
+        
+        .tip {
+            background: #d1ecf1;
+            border-right: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        
+        .tip::before {
+            content: "💡 טיפ: ";
+            font-weight: bold;
+            color: #0c5460;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        
+        .warning::before {
+            content: "⚠️ שימו לב: ";
+            font-weight: bold;
+            color: #856404;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-right: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+        
+        .success::before {
+            content: "✅ הצלחה: ";
+            font-weight: bold;
+            color: #155724;
+        }
+        
+        ul, ol {
+            margin-right: 25px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(26, 95, 63, 0.3);
+        }
+        
+        .screenshot {
+            border: 2px solid #2d8659;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            padding: 40px;
+            border-radius: 6px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .screenshot-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+            max-width: 100%;
+        }
+        
+        .screenshot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #2d8659;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .annotation {
+            position: absolute;
+            pointer-events: none;
+        }
+        
+        .annotation-circle {
+            border: 3px solid #dc3545;
+            border-radius: 50%;
+            background: rgba(220, 53, 69, 0.1);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .annotation-rectangle {
+            border: 3px solid #dc3545;
+            border-radius: 4px;
+            background: rgba(220, 53, 69, 0.1);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .annotation-arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .annotation-arrow-right {
+            border-width: 8px 0 8px 15px;
+            border-color: transparent transparent transparent #dc3545;
+        }
+        
+        .annotation-arrow-left {
+            border-width: 8px 15px 8px 0;
+            border-color: transparent #dc3545 transparent transparent;
+        }
+        
+        .annotation-arrow-down {
+            border-width: 15px 8px 0 8px;
+            border-color: #dc3545 transparent transparent transparent;
+        }
+        
+        .annotation-arrow-up {
+            border-width: 0 8px 15px 8px;
+            border-color: transparent transparent #dc3545 transparent;
+        }
+        
+        .annotation-label {
+            position: absolute;
+            background: #dc3545;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 מדריך שימוש מלא</h1>
+            <p class="subtitle">Moodle PDF Downloader - לסטודנטים באוניברסיטת בר אילן</p>
+        </div>
+
+        <div class="section">
+            <h2>🎯 מה התוסף עושה?</h2>
+            <p>התוסף <span class="highlight">Moodle PDF Downloader</span> מאפשר לך לסרוק דפי קורסים ב-למדא של אוניברסיטת בר אילן ולמצוא את כל קישורי ה-PDF וההקלטות (וידאו/אודיו) בדף. לאחר מכן תוכל להוריד את כל הקבצים בבת אחת או לבחור קבצים ספציפיים להורדה.</p>
+            
+            <div class="success">
+                התוסף חוסך לך זמן רב - במקום ללחוץ על כל קישור בנפרד, פשוט לחץ על כפתור אחד וכל הקבצים יורדו אוטומטית!
+            </div>
+            
+            <h3>תכונות עיקריות:</h3>
+            <ul>
+                <li>✅ סריקה אוטומטית של קבצי PDF</li>
+                <li>✅ סריקה אוטומטית של הקלטות וידאו/אודיו</li>
+                <li>✅ הורדה ישירה של קבצים (ללא פתיחת טאבים)</li>
+                <li>✅ ארגון קבצים בתיקיות לפי שם הקורס</li>
+                <li>✅ מילוי אוטומטי של שם הקורס</li>
+                <li>✅ הורדה בודדת או מרובת קבצים</li>
+                <li>✅ הצגת סטטיסטיקות הורדה</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📥 שלב 1: התקנת התוסף</h2>
+            
+            <div class="step">
+                <h4><span class="step-number">1</span>פתח את Chrome Extensions</h4>
+                <p>פתח את Google Chrome ועבור לכתובת:</p>
+                <div class="code-block">chrome://extensions/</div>
+                <p><strong>או דרך התפריט:</strong></p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 10px;">שלב 1: לחץ על שלוש הנקודות</div>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; border-right: 4px solid #dc3545;">
+                            <span style="font-size: 24px; color: #666;">⋮</span>
+                            <span style="color: #dc3545; font-weight: bold; margin-right: 10px;">← לחץ כאן בפינה הימנית העליונה</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px; position: relative;">
+                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 10px;">שלב 2: בחר "תוספים"</div>
+                        <div style="background: #fff; border: 2px solid #dc3545; border-radius: 6px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="padding: 8px; border-bottom: 1px solid #e0e0e0;">כרטיסייה חדשה</div>
+                            <div style="padding: 8px; border-bottom: 1px solid #e0e0e0;">חלון חדש</div>
+                            <div style="padding: 8px; border-bottom: 1px solid #e0e0e0; background: rgba(220, 53, 69, 0.1); border-right: 4px solid #dc3545;">
+                                <strong style="color: #dc3545;">🔧 תוספים</strong> <span style="color: #dc3545;">→</span>
+                            </div>
+                            <div style="padding: 8px; border-bottom: 1px solid #e0e0e0;">היסטוריה</div>
+                            <div style="padding: 8px;">הגדרות</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 10px; position: relative;">
+                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 10px;">שלב 3: בחר "ניהול תוספים"</div>
+                        <div style="background: #fff; border: 2px solid #dc3545; border-radius: 6px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-right: 20px;">
+                            <div style="padding: 8px; background: rgba(220, 53, 69, 0.1); border-right: 4px solid #dc3545;">
+                                <strong style="color: #dc3545;">🧩 ניהול תוספים</strong>
+                            </div>
+                            <div style="padding: 8px; border-top: 1px solid #e0e0e0;">לחנות האינטרנט של Chrome</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip" style="margin-top: 20px;">
+                    <strong>💡 טיפ:</strong> לאחר שתבחר "ניהול תוספים", תועבר לדף <code>chrome://extensions/</code> שבו תוכל להפעיל את מצב המפתח ולטעון את התוסף.
+                </div>
+            </div>
+
+            <div class="step">
+                <h4><span class="step-number">2</span>הפעל מצב מפתח</h4>
+                <p>בפינה הימנית העליונה של דף ההרחבות, מצא את המתג <span class="highlight">"מצב מפתח"</span> (Developer mode) והפעל אותו.</p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: white; border-radius: 6px;">
+                            <div>
+                                <div style="font-weight: bold; color: #1a5f3f; margin-bottom: 5px;">מצב מפתח</div>
+                                <div style="font-size: 12px; color: #666;">Developer mode</div>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="width: 60px; height: 30px; background: #28a745; border-radius: 15px; position: relative; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                    <div style="width: 26px; height: 26px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px; transition: all 0.3s;"></div>
+                                </div>
+                                <div style="color: #dc3545; font-weight: bold; margin-top: 5px; text-align: center; font-size: 12px;">← הפעל</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px; background: #d4edda; border-right: 4px solid #28a745; border-radius: 4px; font-size: 12px; color: #155724;">
+                            ✅ לאחר ההפעלה, תראה אפשרויות נוספות כמו "טען תוסף לא ארוז"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4><span class="step-number">3</span>טען את התוסף</h4>
+                <p>לחץ על הכפתור <span class="highlight">"טען תוסף לא ארוז"</span> (Load unpacked) שמופיע בחלק העליון של הדף.</p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+                            <div style="font-size: 14px; color: #666; margin-bottom: 10px;">דף ההרחבות (chrome://extensions/)</div>
+                            <div style="border-top: 1px solid #e0e0e0; padding-top: 15px; margin-top: 15px;">
+                                <div style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%); color: white; border-radius: 6px; font-weight: bold; cursor: pointer; box-shadow: 0 3px 6px rgba(26, 95, 63, 0.3); border: 2px solid #dc3545;">
+                                    📁 טען תוסף לא ארוז
+                                </div>
+                                <div style="color: #dc3545; font-weight: bold; margin-top: 8px; font-size: 12px;">← לחץ כאן</div>
+                            </div>
+                        </div>
+                        <div style="padding: 10px; background: #d1ecf1; border-right: 4px solid #17a2b8; border-radius: 4px; font-size: 12px; color: #0c5460;">
+                            💡 הכפתור מופיע רק כאשר "מצב מפתח" מופעל
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4><span class="step-number">4</span>בחר את תיקיית התוסף</h4>
+                <p>בחר את התיקייה <span class="highlight">Moodle_Downloader_Extension</span> שבה נמצאים קבצי התוסף.</p>
+                <div class="tip">
+                    ודא שכל הקבצים נמצאים בתיקייה: manifest.json, popup.html, popup.js, content.js, utils.js, background.js, styles.css ותיקיית icons
+                </div>
+            </div>
+
+            <div class="success">
+                התוסף הותקן בהצלחה! תראה את האייקון שלו בסרגל הכלים של Chrome.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 שלב 2: שימוש בתוסף</h2>
+            
+            <div class="step">
+                <h4><span class="step-number">1</span>נווט לדף קורס ב-למדא</h4>
+                <p>פתח את למדא של אוניברסיטת בר אילן ונווט לדף הקורס הרצוי:</p>
+                <div class="code-block">https://lemida.biu.ac.il/course/view.php?id=XXXXX</div>
+                <div class="warning">
+                    התוסף עובד רק על דפי קורסים של למדא באוניברסיטת בר אילן (lemida.biu.ac.il)
+                </div>
+            </div>
+
+            <div class="step">
+                <h4><span class="step-number">2</span>פתח את התוסף</h4>
+                <p>לחץ על אייקון התוסף בסרגל הכלים של Chrome (בפינה הימנית העליונה).</p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="background: #2d2d2d; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                            <div style="color: white; font-size: 12px; margin-bottom: 8px;">סרגל הכלים של Chrome</div>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <div style="width: 32px; height: 32px; background: #1a5f3f; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; border: 2px solid #dc3545; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                                    📥
+                                </div>
+                                <div style="color: #dc3545; font-weight: bold; font-size: 14px;">← לחץ על האייקון</div>
+                            </div>
+                        </div>
+                        <div style="background: white; border: 2px solid #2d8659; border-radius: 8px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            <div style="text-align: center; color: #1a5f3f; font-weight: bold; margin-bottom: 15px; font-size: 18px;">
+                                🏛️ Moodle Downloader
+                            </div>
+                            <div style="text-align: center; color: #666; font-size: 12px; margin-bottom: 15px;">
+                                לסטודנטים באוניברסיטת בר אילן
+                            </div>
+                            <div style="border-top: 1px solid #e0e0e0; padding-top: 15px; text-align: center; color: #666; font-size: 12px;">
+                                חלון קופץ יופיע עם ממשק התוסף
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4><span class="step-number">3</span>הגדר תיקיית הורדה (אופציונלי)</h4>
+                <p>לפני הסריקה, תוכל להגדיר תיקייה להורדה:</p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="background: white; border: 2px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+                            <div style="color: #1a5f3f; font-weight: bold; margin-bottom: 10px; font-size: 13px;">📁 שם תיקייה להורדה (אופציונלי):</div>
+                            <div style="display: flex; gap: 5px; align-items: center;">
+                                <input type="text" placeholder="שם הקורס יותאם אוטומטית" style="flex: 1; padding: 8px 12px; border: 2px solid #2d8659; border-radius: 6px; font-size: 13px; direction: rtl;" disabled>
+                                <button style="width: 40px; height: 40px; background: linear-gradient(135deg, #2d8659 0%, #3da66b 100%); color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; border: 2px solid #dc3545; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                                    📚
+                                </button>
+                            </div>
+                            <div style="color: #dc3545; font-weight: bold; margin-top: 8px; font-size: 11px; text-align: center;">
+                                ← לחץ למילוי אוטומטי בשם הקורס
+                            </div>
+                            <div style="font-size: 11px; color: #666; margin-top: 8px; font-style: italic;">
+                                הקבצים יורדו לתיקייה בשם זה בתוך תיקיית ההורדות
+                            </div>
+                        </div>
+                        <div style="padding: 10px; background: #d1ecf1; border-right: 4px solid #17a2b8; border-radius: 4px; font-size: 12px; color: #0c5460;">
+                            💡 אם לא תזין שם תיקייה, הקבצים יורדו ישירות לתיקיית ההורדות
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4><span class="step-number">4</span>סרוק את הדף</h4>
+                <p>לחץ על הכפתור <span class="highlight">"🔍 מצא קבצי PDF"</span>.</p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: white; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 15px;">
+                            <div style="font-size: 24px; margin-bottom: 5px;">🏛️</div>
+                            <div style="color: #1a5f3f; font-weight: bold; font-size: 18px; margin-bottom: 5px;">Moodle Downloader</div>
+                            <div style="color: #2d8659; font-size: 12px;">לסטודנטים באוניברסיטת בר אילן</div>
+                        </div>
+                        <div style="border-top: 2px solid #e0e0e0; padding-top: 15px; margin-top: 15px;">
+                            <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                                <button style="flex: 1; padding: 12px; background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%); color: white; border: none; border-radius: 8px; font-weight: bold; border: 2px solid #dc3545; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                                    📄 קבצי PDF
+                                </button>
+                                <button style="flex: 1; padding: 12px; background: #6c757d; color: white; border: none; border-radius: 8px; font-weight: bold;">
+                                    🎥 הקלטות
+                                </button>
+                            </div>
+                            <button style="width: 100%; padding: 14px; background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%); color: white; border: 2px solid #dc3545; border-radius: 8px; font-weight: bold; font-size: 16px; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                                🔍 מצא קבצי PDF
+                            </button>
+                            <div style="color: #dc3545; font-weight: bold; margin-top: 8px; text-align: center; font-size: 12px;">
+                                ← לחץ כאן להתחלת הסריקה
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: #d4edda; border-right: 4px solid #28a745; border-radius: 4px; font-size: 12px; color: #155724;">
+                        ✅ התוסף יסרוק את הדף ויחפש את כל קישורי ה-PDF
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h4><span class="step-number">5</span>בדוק את התוצאות</h4>
+                <p>לאחר הסריקה, תראה:</p>
+                <ul>
+                    <li><strong>מספר הקבצים שנמצאו</strong> - בכותרת הסטטיסטיקות</li>
+                    <li><strong>רשימת הקבצים</strong> - כל קובץ עם שם, סוג וקישור</li>
+                    <li><strong>כפתור "הורד את כל הקבצים"</strong> - להורדה מרוכזת</li>
+                </ul>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: white; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 2px solid #28a745;">
+                            <div style="display: flex; justify-content: space-around; text-align: center;">
+                                <div>
+                                    <div style="font-size: 24px; font-weight: bold; color: #2d8659; margin-bottom: 5px;">5</div>
+                                    <div style="font-size: 12px; color: #555;">סה"כ קבצים</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 24px; font-weight: bold; color: #2d8659; margin-bottom: 5px;">0</div>
+                                    <div style="font-size: 12px; color: #555;">הורדו</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button style="width: 100%; padding: 12px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: 2px solid #dc3545; border-radius: 8px; font-weight: bold; margin-bottom: 15px; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                            ⬇️ הורד את כל הקבצים (5)
+                        </button>
+                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 15px; text-align: center; font-size: 12px;">
+                            ← לחץ להורדה מרוכזת של כל הקבצים
+                        </div>
+                        
+                        <div style="border-top: 2px solid #e0e0e0; padding-top: 15px;">
+                            <div style="background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
+                                <div style="font-weight: bold; color: #1a5f3f; margin-bottom: 5px; font-size: 14px;">1. תרגול 1 קובץ.pdf</div>
+                                <div style="font-size: 10px; color: #666; background: #e8f5e9; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 5px;">סוג: pluginfile</div>
+                                <div style="font-size: 11px; color: #666; margin-bottom: 8px; font-family: monospace;">https://lemida.biu.ac.il/pluginfile.php/...</div>
+                                <button style="width: 100%; padding: 8px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold;">
+                                    ⬇️ הורד קובץ זה
+                                </button>
+                            </div>
+                            
+                            <div style="background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px;">
+                                <div style="font-weight: bold; color: #1a5f3f; margin-bottom: 5px; font-size: 14px;">2. תרגיל 2 קובץ.pdf</div>
+                                <div style="font-size: 10px; color: #666; background: #e8f5e9; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 5px;">סוג: pluginfile</div>
+                                <div style="font-size: 11px; color: #666; margin-bottom: 8px; font-family: monospace;">https://lemida.biu.ac.il/pluginfile.php/...</div>
+                                <button style="width: 100%; padding: 8px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold;">
+                                    ⬇️ הורד קובץ זה
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: #d4edda; border-right: 4px solid #28a745; border-radius: 4px; font-size: 12px; color: #155724;">
+                        ✅ כל קובץ מוצג עם שם, סוג, קישור וכפתור הורדה נפרד
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⬇️ שלב 3: הורדת הקבצים</h2>
+            
+            <h3>אפשרות 1: הורדה מרוכזת (מומלץ)</h3>
+            <div class="step">
+                <p>לחץ על הכפתור <span class="highlight">"⬇️ הורד את כל הקבצים"</span>.</p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: white; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; margin-bottom: 15px;">
+                            <div style="font-size: 48px; margin-bottom: 10px;">⬇️</div>
+                            <div style="color: #1a5f3f; font-weight: bold; font-size: 16px; margin-bottom: 5px;">הורדה מרוכזת</div>
+                            <div style="color: #666; font-size: 12px;">כל הקבצים יורדו אוטומטית</div>
+                        </div>
+                        <button style="width: 100%; padding: 14px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: 2px solid #dc3545; border-radius: 8px; font-weight: bold; font-size: 16px; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                            ⬇️ הורד את כל הקבצים (5)
+                        </button>
+                        <div style="color: #dc3545; font-weight: bold; margin-top: 10px; text-align: center; font-size: 12px;">
+                            ← לחץ כאן להורדת כל הקבצים בבת אחת
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px; background: #d1ecf1; border-right: 4px solid #17a2b8; border-radius: 4px; font-size: 12px; color: #0c5460;">
+                            💡 הקבצים יורדו אחד אחרי השני, עם שמות נכונים וסיומת .pdf
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>אפשרות 2: הורדה סלקטיבית</h3>
+            <div class="step">
+                <p>לחץ על הכפתור <span class="highlight">"⬇️ הורד קובץ זה"</span> ליד כל קובץ שברצונך להוריד.</p>
+                <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659;">
+                    <div style="background: white; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                            <div style="font-weight: bold; color: #1a5f3f; margin-bottom: 8px; font-size: 14px;">1. תרגול 1 קובץ.pdf</div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 10px; font-family: monospace; background: #fff; padding: 5px; border-radius: 4px;">https://lemida.biu.ac.il/pluginfile.php/...</div>
+                            <button style="width: 100%; padding: 10px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: 2px solid #dc3545; border-radius: 6px; font-size: 13px; font-weight: bold; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                                ⬇️ הורד קובץ זה
+                            </button>
+                            <div style="color: #dc3545; font-weight: bold; margin-top: 8px; text-align: center; font-size: 11px;">
+                                ← לחץ להורדת קובץ זה בלבד
+                            </div>
+                        </div>
+                        <div style="background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px;">
+                            <div style="font-weight: bold; color: #1a5f3f; margin-bottom: 8px; font-size: 14px;">2. תרגיל 2 קובץ.pdf</div>
+                            <div style="font-size: 11px; color: #666; margin-bottom: 10px; font-family: monospace; background: #fff; padding: 5px; border-radius: 4px;">https://lemida.biu.ac.il/pluginfile.php/...</div>
+                            <button style="width: 100%; padding: 10px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: bold;">
+                                ⬇️ הורד קובץ זה
+                            </button>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px; background: #d1ecf1; border-right: 4px solid #17a2b8; border-radius: 4px; font-size: 12px; color: #0c5460;">
+                            💡 בחר בדיוק אילו קבצים להוריד - שימושי כאשר אתה רוצה רק חלק מהקבצים
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success" style="margin-top: 20px;">
+                <strong>✅ הקבצים יישמרו בתיקיית ההורדות הרגילה שלך ב-Chrome</strong><br>
+                אם הגדרת שם תיקייה, הקבצים יישמרו בתיקייה בשם זה בתוך תיקיית ההורדות
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎨 תכונות מתקדמות</h2>
+            
+            <h3>📊 סטטיסטיקות</h3>
+            <p>לאחר הסריקה, תראה סטטיסטיקות:</p>
+            <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659; margin-top: 15px;">
+                <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 20px; border-radius: 8px; border: 2px solid #2d8659;">
+                        <div style="display: flex; justify-content: space-around; text-align: center;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 32px; font-weight: bold; color: #2d8659; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(45, 134, 89, 0.2);">5</div>
+                                <div style="font-size: 13px; color: #555; font-weight: 500;">סה"כ קבצים</div>
+                                <div style="font-size: 11px; color: #666; margin-top: 5px;">מספר הקבצים שנמצאו בדף</div>
+                            </div>
+                            <div style="width: 2px; background: #e0e0e0; margin: 0 20px;"></div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 32px; font-weight: bold; color: #28a745; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(40, 167, 69, 0.2);">3</div>
+                                <div style="font-size: 13px; color: #555; font-weight: 500;">הורדו</div>
+                                <div style="font-size: 11px; color: #666; margin-top: 5px;">מתעדכן בזמן אמת</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: #d1ecf1; border-right: 4px solid #17a2b8; border-radius: 4px; font-size: 12px; color: #0c5460;">
+                        💡 הסטטיסטיקות מתעדכנות אוטומטית בזמן שאתה מוריד קבצים
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔍 זיהוי חכם</h3>
+            <p>התוסף מזהה קבצי PDF במגוון דרכים:</p>
+            <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659; margin-top: 15px;">
+                <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="color: #1a5f3f; font-weight: bold; margin-bottom: 15px; font-size: 16px; text-align: center;">🔍 שיטות זיהוי PDF</div>
+                    <div style="display: grid; gap: 10px;">
+                        <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px;">
+                            <div style="font-weight: bold; color: #2d8659; margin-bottom: 5px;">1. קישורים ישירים</div>
+                            <div style="font-size: 11px; color: #666; font-family: monospace; background: #f8f9fa; padding: 5px; border-radius: 4px;">https://example.com/file.pdf</div>
+                        </div>
+                        <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px;">
+                            <div style="font-weight: bold; color: #2d8659; margin-bottom: 5px;">2. קישורי Moodle</div>
+                            <div style="font-size: 11px; color: #666; font-family: monospace; background: #f8f9fa; padding: 5px; border-radius: 4px;">pluginfile.php/...</div>
+                        </div>
+                        <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px;">
+                            <div style="font-weight: bold; color: #2d8659; margin-bottom: 5px;">3. דפי משאב</div>
+                            <div style="font-size: 11px; color: #666; font-family: monospace; background: #f8f9fa; padding: 5px; border-radius: 4px;">mod/resource/view.php</div>
+                        </div>
+                        <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px;">
+                            <div style="font-weight: bold; color: #2d8659; margin-bottom: 5px;">4. קבצים מוטמעים</div>
+                            <div style="font-size: 11px; color: #666; font-family: monospace; background: #f8f9fa; padding: 5px; border-radius: 4px;">&lt;iframe&gt; עם PDF</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: #d4edda; border-right: 4px solid #28a745; border-radius: 4px; font-size: 12px; color: #155724;">
+                        ✅ התוסף ממיר אוטומטית קישורי view.php לקישורי הורדה ישירים
+                    </div>
+                </div>
+            </div>
+
+            <h3>📁 ארגון קבצים בתיקיות</h3>
+            <p>התוסף מאפשר לך לארגן את הקבצים בתיקיות לפי שם הקורס:</p>
+            <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659; margin-top: 15px;">
+                <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="background: white; border: 2px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                        <div style="color: #1a5f3f; font-weight: bold; margin-bottom: 10px; font-size: 13px;">📁 שם תיקייה להורדה (אופציונלי):</div>
+                        <div style="display: flex; gap: 5px; align-items: center;">
+                            <input type="text" value="האויב במקרא - מעמדו ואחריתו" style="flex: 1; padding: 8px 12px; border: 2px solid #2d8659; border-radius: 6px; font-size: 13px; direction: rtl; background: #d4edda;" disabled>
+                            <button style="width: 40px; height: 40px; background: linear-gradient(135deg, #2d8659 0%, #3da66b 100%); color: white; border: 2px solid #dc3545; border-radius: 6px; font-size: 16px; cursor: pointer; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                                📚
+                            </button>
+                        </div>
+                        <div style="color: #dc3545; font-weight: bold; margin-top: 8px; font-size: 11px; text-align: center;">
+                            ← לחץ למילוי אוטומטי בשם הקורס
+                        </div>
+                    </div>
+                    <div style="background: white; border: 2px solid #e0e0e0; border-radius: 8px; padding: 15px;">
+                        <div style="color: #1a5f3f; font-weight: bold; margin-bottom: 10px; font-size: 13px;">📂 מבנה תיקיית ההורדות:</div>
+                        <div style="font-family: monospace; font-size: 12px; color: #666; line-height: 1.8;">
+                            <div>📁 הורדות/</div>
+                            <div style="margin-right: 20px;">└── 📁 האויב במקרא - מעמדו ואחריתו/</div>
+                            <div style="margin-right: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;├── 📄 תרגול 1 קובץ.pdf</div>
+                            <div style="margin-right: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;├── 📄 תרגיל 2 קובץ.pdf</div>
+                            <div style="margin-right: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;└── 📄 הרצאה 3 קובץ.pdf</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: #d1ecf1; border-right: 4px solid #17a2b8; border-radius: 4px; font-size: 12px; color: #0c5460;">
+                        💡 זה עוזר לשמור על סדר בתיקיית ההורדות, במיוחד אם אתה לומד מספר קורסים במקביל
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔍 זיהוי אוטומטי של הקלטות</h3>
+            <p>התוסף מזהה הקלטות במגוון דרכים:</p>
+            <div class="illustration" style="text-align: right; direction: rtl; padding: 25px; background: #fff; border: 2px solid #2d8659; margin-top: 15px;">
+                <div style="background: #f8f9fa; border: 2px solid #dc3545; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+                        <button style="flex: 1; padding: 12px; background: #6c757d; color: white; border: none; border-radius: 8px; font-weight: bold;">
+                            📄 קבצי PDF
+                        </button>
+                        <button style="flex: 1; padding: 12px; background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%); color: white; border: 2px solid #dc3545; border-radius: 8px; font-weight: bold; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                            🎥 הקלטות
+                        </button>
+                    </div>
+                    <div style="color: #dc3545; font-weight: bold; margin-bottom: 15px; text-align: center; font-size: 12px;">
+                        ← לחץ על טאב "הקלטות" לסריקת הקלטות
+                    </div>
+                    <button style="width: 100%; padding: 14px; background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%); color: white; border: 2px solid #dc3545; border-radius: 8px; font-weight: bold; font-size: 16px; box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);">
+                        🔍 מצא הקלטות
+                    </button>
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: #fff3cd; border-right: 4px solid #ffc107; border-radius: 4px;">
+                    <div style="font-weight: bold; color: #856404; margin-bottom: 10px;">🎥 סוגי הקלטות שזוהו:</div>
+                    <ul style="margin-right: 20px; color: #856404; font-size: 12px;">
+                        <li>אלמנטי &lt;video&gt; ו-&lt;audio&gt; ישירים</li>
+                        <li>קישורי videostream (mod/videostream/view.php)</li>
+                        <li>קישורי Oracle Cloud Object Storage</li>
+                        <li>קישורי pluginfile.php עם סיומות וידאו/אודיו</li>
+                        <li>נגני וידאו מוטמעים (iframes)</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-right: 4px solid #ffc107; border-radius: 4px; font-size: 12px; color: #856404;">
+                    ⚠️ התוסף מנסה לחלץ את הקישור הישיר לקובץ הוידאו מדפי videostream. אם זה לא מצליח, הקישור יפתח בטאב חדש.
+                </div>
+            </div>
+
+            <h3>💾 היסטוריית הורדות</h3>
+            <p>התוסף שומר את היסטוריית ההורדות שלך (עד 100 הורדות אחרונות) לשימוש עתידי.</p>
+        </div>
+
+        <div class="section">
+            <h2>❓ שאלות נפוצות (FAQ)</h2>
+            
+            <h3>התוסף לא מוצא קבצי PDF</h3>
+            <ul>
+                <li>ודא שאתה בדף קורס תקין של למדא (lemida.biu.ac.il/course/)</li>
+                <li>ודא שהדף נטען במלואו לפני הסריקה</li>
+                <li>נסה לרענן את הדף ולסרוק שוב</li>
+                <li>פתח את ה-Console (F12) ובדוק אם יש שגיאות</li>
+            </ul>
+
+            <h3>הקבצים נשמרים כ-HTML במקום PDF</h3>
+            <p>זה תוקן בגרסה 1.1! התוסף ממיר אוטומטית קישורי view.php לקישורי הורדה ישירים.</p>
+            <div class="tip">
+                אם עדיין יש בעיה, ודא שהתוסף מעודכן לגרסה 1.1 או חדשה יותר
+            </div>
+
+            <h3>איך אני יודע שהתוסף עובד?</h3>
+            <ul>
+                <li>לאחר הסריקה, תראה הודעה: "✅ נמצאו X קבצי PDF"</li>
+                <li>רשימת הקבצים תופיע עם שמות וקישורים</li>
+                <li>לאחר הורדה, הקבצים יופיעו בתיקיית ההורדות</li>
+            </ul>
+
+            <h3>התוסף לא נטען</h3>
+            <ul>
+                <li>ודא שכל הקבצים נמצאים בתיקייה הנכונה</li>
+                <li>ודא שיש תיקיית icons עם 3 קבצי PNG (icon16.png, icon48.png, icon128.png)</li>
+                <li>בדוק את ה-Console ב-chrome://extensions/ לשגיאות</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ פתרון בעיות</h2>
+            
+            <h3>פתיחת Console לדיבוג</h3>
+            <div class="step">
+                <p>1. לחץ F12 או לחץ ימני על הדף → "בדוק" (Inspect)</p>
+                <p>2. עבור לטאב "Console"</p>
+                <p>3. חפש הודעות שמתחילות ב: <span class="highlight">[Moodle PDF Downloader]</span></p>
+            </div>
+
+            <h3>שגיאות נפוצות</h3>
+            <ul>
+                <li><strong>"אנא נווט לדף קורס תקין"</strong> - ודא שאתה בדף קורס למדא</li>
+                <li><strong>"לא נמצאו קישורי PDF"</strong> - בדף זה אין קבצי PDF, או שהם לא מזוהים</li>
+                <li><strong>"שגיאה בגישה לטאב"</strong> - רענן את הדף ונסה שוב</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📧 תמיכה</h2>
+            <p>אם נתקלת בבעיה או יש לך שאלה:</p>
+            <ul>
+                <li><strong>מייל:</strong> <a href="mailto:idan.vaknin1@live.biu.ac.il" style="color: #2d8659; font-weight: 600;">idan.vaknin1@live.biu.ac.il</a></li>
+                <li><strong>מפתח:</strong> Idan Vaknin</li>
+            </ul>
+            <div class="tip">
+                כשפונים לתמיכה, אנא צרפו:
+                <ul>
+                    <li>תיאור הבעיה</li>
+                    <li>קישור לדף הקורס (אם רלוונטי)</li>
+                    <li>צילומי מסך (אם אפשר)</li>
+                    <li>הודעות שגיאה מה-Console (אם יש)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section disclaimer-section">
+            <h2>⚠️ הצהרת אחריות (Disclaimer)</h2>
+            <div class="disclaimer-content">
+                <p><strong>התוסף מסופק "כפי שהוא" (AS IS) ללא כל אחריות מפורשת או משתמעת.</strong></p>
+                
+                <h3>אחריות המשתמש:</h3>
+                <ul>
+                    <li>השימוש בתוסף הוא על אחריות המשתמש בלבד</li>
+                    <li>המשתמש אחראי לוודא שהשימוש בתוסף תואם את מדיניות האוניברסיטה ואת תנאי השימוש של למדא</li>
+                    <li>המשתמש אחראי לוודא שהקבצים שהורידו משמשים למטרות חוקיות בלבד</li>
+                </ul>
+                
+                <h3>הגבלות אחריות:</h3>
+                <ul>
+                    <li>התוסף אינו קשור לאוניברסיטת בר אילן או למערכת למדא ואינו נתמך על ידם רשמית</li>
+                    <li>המפתח אינו אחראי לכל נזק ישיר או עקיף שייגרם כתוצאה משימוש בתוסף</li>
+                    <li>המפתח אינו מתחייב שהתוסף יעבוד ללא שגיאות או הפרעות</li>
+                    <li>המפתח שומר לעצמו את הזכות לעדכן, לשנות או להפסיק את התוסף בכל עת</li>
+                </ul>
+                
+                <h3>שימוש בקבצים:</h3>
+                <ul>
+                    <li>הקבצים שהורדו באמצעות התוסף הם בבעלות האוניברסיטה או בעלי הזכויות המקוריים</li>
+                    <li>השימוש בקבצים כפוף לחוקי זכויות יוצרים ולמדיניות האוניברסיטה</li>
+                    <li>אסור להפיץ, לשתף או להשתמש בקבצים למטרות מסחריות ללא רשות</li>
+                </ul>
+                
+                <div class="warning">
+                    <strong>⚠️ שים לב:</strong> על ידי שימוש בתוסף זה, אתה מסכים לכל התנאים וההגבלות המפורטות לעיל.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Moodle PDF Downloader v1.3.1</strong></p>
+            <p>פותח עבור קהילת סטודנטי אוניברסיטת בר אילן</p>
+            <p>© 2025 Idan Vaknin</p>
+            <a href="popup.html" class="back-link">← חזרה לתוסף</a>
+        </div>
+    </div>
+</body>
+</html>
+
