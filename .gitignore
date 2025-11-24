@@ -26,14 +26,33 @@ build/
 test/
 tests/
 
-# Documentation that shouldn't be in repo
-# (keep README.md, LICENSE, etc.)
-
-# ZIP files (keep the main release one, but ignore others)
+# ZIP files - all ZIP files should be ignored
 *.zip
-!Moodle_Downloader_Extension_v1.3.1.zip
 
-# Python cache (if using create_icons.py)
+# Documentation files (keep only README.md and LICENSE)
+CHANGELOG.md
+RELEASE_NOTES.md
+INSTALLATION_INSTRUCTIONS.md
+PUBLISHING_GUIDE.md
+DISTRIBUTION_README.md
+CHROME_WEB_STORE_PREPARATION.md
+TESTING_CHECKLIST.md
+DEPLOYMENT_CHECKLIST.md
+QUICK_START.md
+GITHUB_*.md
+CREATE_RELEASE_NOW.md
+
+# Helper tools
+create_icons.py
+icon-generator.html
+
+# Screenshots
+screenshots/
+
+# GitHub workflows (optional - remove if not needed)
+.github/
+
+# Python cache
 __pycache__/
 *.pyc
 
@@ -43,5 +62,3 @@ node_modules/
 # Environment files
 .env
 .env.local
-
-

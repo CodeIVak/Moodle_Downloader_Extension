@@ -1,6 +1,6 @@
 # Moodle PDF Downloader Extension
 
-[![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/yourusername/moodle-downloader-extension)
+[![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/CodeIVak/Moodle_Downloader_Extension)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Chrome](https://img.shields.io/badge/Chrome-88%2B-blue.svg)](https://www.google.com/chrome/)
 
@@ -11,7 +11,7 @@
 ## 🚀 התקנה מהירה
 
 ### מהקובץ המארז (מומלץ)
-1. הורד את [הגרסה האחרונה](https://github.com/yourusername/moodle-downloader-extension/releases/latest)
+1. הורד את [הגרסה האחרונה](https://github.com/CodeIVak/Moodle_Downloader_Extension/releases/latest)
 2. חלץ את הקובץ `Moodle_Downloader_Extension_v1.3.1.zip`
 3. פתח Chrome → `chrome://extensions/`
 4. הפעל "מצב מפתח" (Developer mode)
@@ -19,8 +19,8 @@
 
 ### מהקוד המקור
 ```bash
-git clone https://github.com/yourusername/moodle-downloader-extension.git
-cd moodle-downloader-extension
+git clone https://github.com/CodeIVak/Moodle_Downloader_Extension.git
+cd Moodle_Downloader_Extension
 # פתח Chrome → chrome://extensions/ → טען תוסף לא ארוז
 ```
 
