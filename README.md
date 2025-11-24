@@ -38,30 +38,6 @@ cd Moodle_Downloader_Extension
 3. לחץ על "טען תוסף לא ארוז" (Load unpacked)
 4. בחר את תיקיית `Moodle_Downloader_Extension`
 
-## יצירת אייקונים
-
-התוסף דורש שלושה קבצי אייקונים:
-- `icons/icon16.png` (16x16 פיקסלים)
-- `icons/icon48.png` (48x48 פיקסלים)
-- `icons/icon128.png` (128x128 פיקסלים)
-
-### שיטה 1: שימוש ב-Icon Generator
-
-1. פתח את הקובץ `icon-generator.html` בדפדפן
-2. לחץ על "צור את כל האייקונים"
-3. הקבצים יורדו אוטומטית - העתק אותם לתיקיית `icons/`
-
-### שיטה 2: המרת SVG ל-PNG
-
-1. השתמש בכלי מקוון כמו [CloudConvert](https://cloudconvert.com/svg-to-png) או [Convertio](https://convertio.co/svg-png/)
-2. העלה את `icons/icon.svg`
-3. המר לשלושה גדלים: 16x16, 48x48, 128x128
-4. שמור את הקבצים בשמות המתאימים בתיקיית `icons/`
-
-### שיטה 3: יצירה ידנית
-
-צור שלוש תמונות PNG ריבועיות עם עיצוב של מסמך PDF או כל עיצוב אחר.
-
 ## שימוש
 
 1. נווט לדף קורס ב-למדא (lemida.biu.ac.il/course/)
@@ -106,7 +82,6 @@ Moodle_Downloader_Extension/
 ├── background.js          # Service worker
 ├── styles.css             # עיצוב
 ├── guide.html             # מדריך שימוש מפורט
-├── icon-generator.html    # כלי ליצירת אייקונים
 └── icons/                 # תיקיית אייקונים
     ├── icon16.png
     ├── icon48.png
@@ -115,7 +90,7 @@ Moodle_Downloader_Extension/
 
 ## גרסה
 
-1.3.0
+1.3.1
 
 ## ⚠️ הצהרת אחריות (Disclaimer)
 
